@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Alexa+ simulator · Streamday</title>
+  <meta name="description" content="A simulated Alexa+ smart display running the Streamday MCP server: ask what's new on Australian streaming, get tonight's pick, plan your week.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="sim.css">
+</head>
+<body>
+  <main class="room">
+    <section class="device" aria-label="Simulated Alexa+ smart display">
+      <div class="screen">
+        <header class="status">
+          <span id="clock" class="clock"></span>
+          <span class="skill"><img src="mark.svg" alt="" width="18" height="18">Streamday skill</span>
+        </header>
+        <div class="talk">
+          <p id="heard" class="heard" aria-live="polite"></p>
+          <p id="reply" class="reply" aria-live="polite">Ask me what’s new to stream tonight.</p>
+        </div>
+        <div id="cards" class="cards sd-root" aria-live="polite"></div>
+      </div>
+      <div id="lightbar" class="lightbar" data-state="idle" aria-hidden="true"><span></span></div>
+    </section>
+
+    <aside class="hood" aria-labelledby="hoodTitle">
+      <h2 id="hoodTitle">Under the hood</h2>
+      <p class="hood-sub">Every tool call goes to the Streamday MCP server over Streamable HTTP.</p>
+      <ol id="calls" class="calls"></ol>
+      <p class="viewer">Viewer <code id="viewerId"></code> <button id="newViewer" class="link">Start fresh</button></p>
+    </aside>
+
+    <section class="controls" aria-label="Talk to Alexa+">
+      <button id="mic" class="mic" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
+        <span id="micLabel">Tap to talk</span>
+      </button>
+      <form id="typeForm" class="type">
+        <label class="sr" for="typeInput">Type a question</label>
+        <input id="typeInput" autocomplete="off" placeholder="Or type: what’s new on Netflix this week?">
+        <button class="send">Ask</button>
+      </form>
+      <div class="tries" id="tries" aria-label="Things to try">
+        <button>What’s new tonight?</button>
+        <button>I’ve got Netflix, Stan and ABC iview</button>
+        <button>Pick something light for tonight</button>
+        <button>When’s the next episode of Slow Horses?</button>
+        <button>Follow Slow Horses</button>
+        <button>Plan my week, I’m busy Thursday</button>
+      </div>
+      <label class="voice"><input type="checkbox" id="speak" checked> Speak replies</label>
+    </section>
+  </main>
+  <script type="module" src="sim.js"></script>
+</body>
+</html>

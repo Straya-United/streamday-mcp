@@ -1,0 +1,23 @@
+{
+  "name": "streamday-mcp",
+  "version": "1.0.0",
+  "description": "Streamday MCP server: an Alexa+-ready guide to what's new on Australian streaming, with memory and MCP App cards.",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "build": "node scripts/build-view.mjs",
+    "dev": "node scripts/build-view.mjs && node scripts/dev.mjs",
+    "smoke": "node scripts/smoke.mjs",
+    "test": "node --test test/*.test.mjs"
+  },
+  "engines": { "node": ">=20" },
+  "dependencies": {
+    "@modelcontextprotocol/ext-apps": "2.0.3",
+    "@modelcontextprotocol/sdk": "1.32.1",
+    "@netlify/blobs": "^11.1.2",
+    "zod": "^3.25.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0"
+  }
+}
