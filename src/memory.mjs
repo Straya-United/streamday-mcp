@@ -1,18 +1,17 @@
 // Per-viewer memory that survives across sessions: services, followed shows, recent picks, timezone.
 // Netlify Blobs in production; an in-process map when running locally without Netlify.
-let blobStore = null;
+// The Blobs store is opened per request: its credentials are request-scoped and expire, so a store
+// cached in a warm function instance fails later with "Token expired".
 const local = new Map();
+const NAME = 'streamday-mcp-viewers';
 
 async function store() {
-  if (blobStore !== null) return blobStore;
   try {
     const { getStore } = await import('@netlify/blobs');
-    blobStore = getStore({ name: 'streamday-mcp-viewers', consistency: 'strong' });
-    await blobStore.get('__probe'); // throws outside a Netlify context
+    return getStore({ name: NAME, consistency: 'strong' }); // throws outside a Netlify context
   } catch {
-    blobStore = false;
+    return null;
   }
-  return blobStore;
 }
 
 const blank = () => ({ services: [], follow: {}, history: [], tz: null, createdAt: new Date().toISOString() });

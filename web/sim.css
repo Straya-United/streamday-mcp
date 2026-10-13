@@ -29,11 +29,11 @@ button, input { font: inherit; color: inherit; }
 }
 
 /* ---------- the device ---------- */
-.device { grid-area: device; background: var(--bezel); border-radius: 30px; padding: 14px 14px 0; box-shadow: 0 40px 80px rgba(0, 0, 0, .55), 0 0 0 1px rgba(255, 255, 255, .05) inset; }
+.device { grid-area: device; align-self: start; background: var(--bezel); border-radius: 30px; padding: 14px 14px 0; box-shadow: 0 40px 80px rgba(0, 0, 0, .55), 0 0 0 1px rgba(255, 255, 255, .05) inset; }
 .screen {
   aspect-ratio: 16 / 9; border-radius: 18px; overflow: hidden; position: relative;
   background: radial-gradient(700px 300px at 85% -10%, rgba(255, 79, 139, .14), transparent 70%), var(--screen);
-  display: grid; grid-template-rows: auto auto 1fr; padding: 22px 30px 20px;
+  display: grid; grid-template-rows: auto auto minmax(0, 1fr); padding: 22px 30px 20px; min-height: 0;
 }
 .status { display: flex; justify-content: space-between; align-items: center; color: var(--muted); font-size: 15px; }
 .clock { font-weight: 700; color: var(--text); }
@@ -47,7 +47,7 @@ button, input { font: inherit; color: inherit; }
   font-variation-settings: "opsz" 72; text-wrap: pretty;
 }
 .reply.thinking { color: var(--muted); }
-.cards { overflow-y: auto; scrollbar-width: none; padding-bottom: 4px; }
+.cards { overflow-y: auto; scrollbar-width: none; padding-bottom: 4px; min-height: 0; }
 .cards::-webkit-scrollbar { display: none; }
 .cards .sd-grid { grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); }
 .cards .sd-head { display: none; } /* the reply already says what this is */
@@ -57,8 +57,12 @@ button, input { font: inherit; color: inherit; }
 .cards .sd-top .sd-hero { height: 96px; }
 .cards .sd-week { grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px; }
 .cards .sd-night { padding: 6px; }
-.cards .sd-compact { grid-template-columns: 1fr; gap: 6px; padding: 6px; }
-.cards .sd-compact .sd-poster { width: 56%; }
+.cards .sd-night .sd-compact { grid-template-columns: 26px minmax(0, 1fr); gap: 7px; padding: 6px; align-items: start; margin-bottom: 6px; }
+.cards .sd-compact .sd-meta { flex-wrap: wrap; }
+.cards .sd-compact h3 { font-size: 12.5px; line-height: 1.2; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 4px; }
+.cards .sd-compact .sd-svc { font-size: 10.5px; padding: 2px 6px; }
+.cards .sd-night h4 { font-size: 13px; margin: 2px 2px 6px; }
+.cards .sd-week { overflow: hidden; }
 .cards .sd-night { min-height: 100%; }
 
 /* ---------- the light bar: the one loud thing ---------- */
@@ -76,7 +80,7 @@ button, input { font: inherit; color: inherit; }
 @media (prefers-reduced-motion: reduce) { .lightbar span { animation: none !important; transition: none !important; } }
 
 /* ---------- controls ---------- */
-.controls { grid-area: controls; display: grid; grid-template-columns: auto 1fr; gap: 14px 16px; align-items: center; }
+.controls { grid-area: controls; align-self: start; display: grid; grid-template-columns: auto 1fr; gap: 14px 16px; align-items: center; }
 .mic {
   display: inline-flex; align-items: center; gap: 10px; height: 56px; padding: 0 22px 0 18px; border-radius: 28px; border: 0; cursor: pointer;
   background: linear-gradient(120deg, var(--violet), var(--pink)); font-weight: 700; font-size: 17px; box-shadow: 0 10px 26px rgba(255, 79, 139, .35);
